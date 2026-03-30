@@ -29,24 +29,30 @@ const NativeForms = () => {
     const elements = form.elements;
 
     const fieldElements = Array.from(elements).filter(
-      (element) => element.name
+      // @ts-expect-error
+      (element) => element.name,
     );
 
     const data: Record<string, string> = {};
 
     fieldElements.forEach((element) => {
+      // @ts-expect-error
       if (element.type === "checkbox") {
+        // @ts-expect-error
         data[element.name] = String(element.checked);
         return;
       }
 
+      // @ts-expect-error
       if (element.type === "radio") {
+        // @ts-expect-error
         if (element.checked) {
+          // @ts-expect-error
           data[element.name] = element.value;
         }
         return;
       }
-
+      // @ts-expect-error
       data[element.name] = element.value;
     });
 
@@ -65,7 +71,8 @@ const NativeForms = () => {
     const form =
       e.target instanceof HTMLFormElement
         ? e.target
-        : (document.forms.mainForm as HTMLFormElement);
+        : // @ts-expect-error
+          (document.forms.mainForm as HTMLFormElement);
 
     if (!form.checkValidity()) {
       console.log("form is not valid");

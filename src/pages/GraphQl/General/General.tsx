@@ -41,24 +41,24 @@ const query = `
   ${fragment}
 `;
 
-const mutation = `
-  mutation addCharacter($name: String!, $status: String!) {
-    createCharacter(name: $name, status: $status) {
-      ...CharacterFragment
-    }
-  }
+// const mutation = `
+//   mutation addCharacter($name: String!, $status: String!) {
+//     createCharacter(name: $name, status: $status) {
+//       ...CharacterFragment
+//     }
+//   }
 
-  ${fragment}
-`;
+//   ${fragment}
+// `;
 
 export const General = () => {
   const [data, setData] = useState<ICharacter[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
-  const [name, setName] = useState("");
+  // const [name] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState("");
+  // const [status] = useState("");
 
   const requestData = useCallback(async (page: number) => {
     setIsLoading(true);
@@ -84,15 +84,15 @@ export const General = () => {
     requestData(1);
   }, [requestData]);
 
-  const handleAddCharacter = () => {
-    rickAndMortyQuery(mutation, { name, status })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  };
+  // const handleAddCharacter = () => {
+  //   rickAndMortyQuery(mutation, { name, status })
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       setError(error.message);
+  //     });
+  // };
 
   return (
     <Box sx={{ p: 3 }}>
@@ -148,8 +148,8 @@ export const General = () => {
                         character.status === "Alive"
                           ? "success"
                           : character.status === "Dead"
-                          ? "error"
-                          : "default"
+                            ? "error"
+                            : "default"
                       }
                     />
                   </CardContent>
